@@ -1,0 +1,182 @@
+\documentclass[letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+
+\title{STA 463: Crop Yield Problem}
+\author{Kwangju Kim}
+\date{April 22, 2016}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+\begin{flushleft}
+This document is to serve as a procedure document of 'crop yield' problem, which is to be submitted for STA 463 Homework 25.
+
+The data contains the data, which are moisture ($X_{i1}$), temperature ($X_{i2}$), and the yield of hybrid tomato ($Y_i$).
+\end{flushleft}
+
+\section{SAS output}
+\begin{flushleft}
+A SAS source code and its output are provided in a separate group of paper.
+\end{flushleft}
+
+\section{Problem 9.12}
+
+\subsection{(a)1}
+\begin{flushleft}
+The second order fitted model for this data will be:
+\end{flushleft}
+
+\begin{center}
+$Y_i = \beta_0 + \beta_1x_{i1} + \beta_2x_{i2} + \beta_{11}x^2_{i1} + \beta_{22}x^2_{i2} + \beta_{12}x_{i1}x_{i2}$
+\end{center}
+
+\begin{flushleft}
+Using the above model, the fitted regression surface was obtained using SAS. (Please refer to Page 1 of SAS output provided.)
+\end{flushleft}
+
+\begin{center}
+$\hat{y} = - 24.23976 + 5.24827x_1 + 5.25269x_2 - 0.29049x^2_1 - 0.29012x^2_2 - 0.00881x_1x_2$
+\end{center}
+
+\subsection{(a)2}
+\subsubsection{Plot $Y_i$ vs. $x_{i1}$  (Page 7)}
+There is a quadratic relationship. It is because the curved pattern was detected in this model.
+
+\subsubsection{Plot $Y_i$ vs. $x_{i2}$ (Page 8)}
+There might be a quadratic relationship because it seems to have a curved pattern, but the output is a little more random compared to the above plot.
+
+\subsubsection{Plot residual vs. $\hat{y}$  (Page 9)}
+Model is appropriate, there is a constant error variance, no outliers. It is because there is no pattern found in this model.
+
+\subsubsection{Plot residual vs. $x_{i1}$ (Page 10)}
+Model is appropriate, there is a constant error variance, no outliers. It is because there is no pattern found in this model.
+
+\subsubsection{Plot residual vs. $x_{i2}$ (Page 11)}
+Model is appropriate, there is a constant error variance, no outliers. It is because there is no pattern found in this model.
+
+\subsubsection{Test for normality (Page 12)}
+See Page 12 of SAS output. We refer to Shapiro-Wilk's test. $W = 0.929094$ and $p$-value$>0.05$. We failed to reject the null hypothesis. That being said, there is not enough evidence that the error terms are not normally distributed.
+
+\subsection{(a)3}
+\begin{flushleft}
+The lack of fit test cannot be conducted in this data because there is no replication.
+\end{flushleft}
+
+\subsection{(b)}
+\begin{flushleft}
+The $R^2$ is a proportion of total variation and can be obtained by following equation:
+\end{flushleft}
+
+\begin{center}
+$R^2 = \frac{SSR}{SSTO} = 1 - \frac{SSE}{SSTO}$
+\end{center}
+
+\begin{flushleft}
+Since $SSR = 211.83520$ and $SSTO = 225.26$ (provided in Page 1 of SAS output), $R^2 = 0.9404$. In conclusion, 94.04\% of variablity of $Y$, the yield of hybrid tomato, is explained by independent variables.
+\end{flushleft}
+
+\subsection{(c)}
+\begin{flushleft}
+This subsection is to hypothetically test whether or not there is a regression relations, with $\alpha=0.05$. The null hypothesis is 'there is no regression relationship between the yield of hybrid tomato and both moisture and temperature.' The alternative hypothesis is 'there is a regression relationship.' Denoting both hypotheses is following:
+\end{flushleft}
+
+\begin{center}
+$H_0: \beta_0=\beta_1=\beta_2=\beta_{11}=\beta_{12}=\beta_{22}=0$
+
+$H_1: $At least 1 $\beta_k$ is not 0, where $k = 0, 1, 2, 11, 12, 22$
+
+Critical Region $f > F(1 - \alpha, 5, 18) = 2.772853$
+\end{center}
+
+\begin{flushleft}
+Performing F test with $MSR=\frac{SSR}{df_{reg}}$ and $MSE=\frac{SSR}{df_{err}}$ (provided in Page 1 of SAS output), using 5 and 18 degrees of freedom each.
+\end{flushleft}
+
+\begin{center}
+$F = \frac{SSR=211.8352/df_{reg}=5}{SSE=13.4248/df_{err}=18} = \frac{MSR=42.36704}{MSE=0.74582} = 56.81 > 2.772853$
+\end{center}
+
+\begin{flushleft}
+F-test falls into the critical region, so we reject the null hypothesis $H_0$. There is a (second order) regression relation between the yield of hybrid tomato and both moisture and temperature. $p$-value$ < 0.0001$
+\end{flushleft}
+
+\subsection{(d)}
+\begin{flushleft}
+In this subsection, we have to estimate $E(y_h)$ where $x_{h1} = 7$ and $x_{h2} = 22$. The CLM is argued for SAS and the output is provided in Page 2 of the output. According to the output, I am 95\% confident that the mean yield of hybrid tomato is between 49.2611 and 50.6818 when the moisture is 7 and the temerature is 22.
+\end{flushleft}
+
+\begin{flushleft}
+We could have also calculated, by hand, $E(y_h)$ by using following equation:
+\end{flushleft}
+
+\begin{center}
+$\hat{y}_h \pm t(1 - \alpha, df_{err}) s(\hat{y}_h)$
+\end{center}
+
+\section{Problem 9.13}
+
+\subsection{(a)}
+\begin{center}
+$H_0: \beta_{12}=0$
+
+$H_1: \beta_{12}\neq0$
+
+$\alpha = 0.005$
+
+$F = \frac{MSR(x_1x_2|x_1,x_2,x^2_1,x^2_2)}{MSE(x_1, x_2, x^2_1, x^2_2, x_1x_2)}$
+
+Critical Region $f > F(1 - \alpha, 1, 18) = 10.21809$
+\end{center}
+
+\begin{flushleft}
+$MSR(x_1x_2|x_1,x_2,x^2_1,x^2_2)$ and $MSE(x_1, x_2, x^2_1, x^2_2, x_1x_2)$ can be obtained from an expected ANOVA table. This is provided at the separate sheet of paper. According to the table, $f = 1.6209 < 10.21809$ hence we failed to reject the null hypothesis $H_0$. There is not enough evidence that there is a interaction effect of both moisture and temperature when adjusted for linear and quadratic effects of both moisture and temperature. $p$-value$=0.22$
+\end{flushleft}
+
+\subsection{(b)}
+\begin{center}
+$H_0: \beta_{11}=\beta_{22}=0$
+
+$H_1: $ At least 1 $\beta_k$ is not 0, where $k = 11, 22$
+
+$\alpha = 0.005$
+
+$F = \frac{MSR(x^2_1,x^2_2|x_1,x_2)}{MSE(x_1, x_2, x^2_1, x^2_2)}$
+
+Critical Region $f > F(1 - \alpha, 2, 19) = 7.093473$
+\end{center}
+
+\begin{flushleft}
+$MSR(x^2_1,x^2_2|x_1,x_2)$ and $MSE(x_1, x_2, x^2_1, x^2_2)$ can be calculated from an expected ANOVA table. The procedure is provided at the separate sheet of paper. According to the table, $f = 66.3094 > 7.093473$ hence we reject the null hypothesis $H_0$. A quadratic relationship exists between moisture and temperature when adjusted for linear effects of moisture and temperature, when we assume the interaction effect has been dropped. $p$-value$\approx0$
+\end{flushleft}
+
+\subsection{(c)1}
+\begin{flushleft}
+The fitted regression surface omitting the interaction and quadratic effect term would be following:
+\end{flushleft}
+
+\begin{center}
+$\hat{y} = - 24.23976 + 5.26827x_1 + 5.25269x_2$
+\end{center}
+
+\begin{flushleft}
+which was deriven from the following model:
+\end{flushleft}
+
+\begin{center}
+$y_i = \beta_0 + \beta_1x_{i1} + \beta_2x_{i2}$
+\end{center}
+
+\subsection{(c)2}
+\begin{flushleft}
+The ANOVA F-test for the above fitted regression surface has been conducted at the separate sheet of paper.
+\end{flushleft}
+
+\subsection{(d) - extra}
+\begin{flushleft}
+An expended ANOVA table is provided at the separate sheet of paper.
+\end{flushleft}
+
+\end{document}
