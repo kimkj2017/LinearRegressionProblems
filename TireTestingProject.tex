@@ -1,0 +1,193 @@
+\documentclass[letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+
+\title{STA 463: Tire Testing Problem}
+\author{Kwangju Kim}
+\date{May 2, 2016}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+\begin{flushleft}
+This document is to show all the procedures of 'Tire Testing Problem' assigned on Wednesday, April 27th, 2016, and submitted on Monday, May 2, 2016.
+\end{flushleft}
+
+\begin{flushleft}
+The variable given was following.
+\end{flushleft}
+
+\begin{itemize}
+\item $Y_i$: Operating cost per mile
+\item $X_1$: Cruising speed
+\end{itemize}
+
+\begin{flushleft}
+It is also noticed that make A and B can be served as a qualitative variable of this model. Hence, we can denote as following:
+\end{flushleft}
+
+\begin{itemize}
+\item $X_2$: Types of Make (A, B)
+\end{itemize}
+
+\subsection{Special Instructions}
+\begin{itemize}
+\item Model 10.6? was used the regression lines for type A and type B to have different $y$-intercepts and slopers.
+\item This problem was done using SAS.
+\item In part (c), after finding the confidence interval, a hypothesis test was completed by reporting $H_0$, $H_1$, decision, and conclusion.
+\end{itemize}
+
+\section{Part B}
+\begin{flushleft}
+The following suggests the model to be used for this problem.
+\end{flushleft}
+
+\begin{center}
+$Y_i = \beta_0 + \beta_1x_{i1} + \beta_2x_{i2} + \epsilon_i$
+\end{center}
+
+\begin{flushleft}
+The above model can be re-written as following:
+\end{flushleft}
+
+\begin{center}
+$Y_i = (\beta_0 + \beta_2x_{i2}) + \beta_1x_{i1} + \epsilon_i$
+\end{center}
+
+\begin{flushleft}
+We can consider, on the re-written model, that $\beta_0 + \beta_2x_{i2}$ is $y$-intercept of this model, because $x_2$ is the qualitative variable, having only 2 possible values. Hence, we would say $\beta^*_0$ to be $\beta_0 + \beta_2x_{i2}$. In this case, considering $x_2$ for Make A is 0, and for Make B 1, $\beta_2$ can be denoted as difference in the $y$-intercept - that is, the mean operating cost per mile - between the two types of make, when adjusted by a cruising speed. In short, the following can be made.
+\end{flushleft}
+
+\begin{itemize}
+\item Note: $x_2 = 0$ for Make A and $1$ for Make B.
+\item $E(Y) = \beta_0$ (Intepret: the mean operating cost per mile of Make A)
+\item $E(Y) = \beta_0 + \beta_2$ (Interpret: the mean operating cost per mile of Make B)
+\end{itemize}
+
+\begin{flushleft}
+The hypothesis test can be performed to investigate whether or not the regression functions are the same for two makes for tires. This test can be denoted as following:
+\end{flushleft}
+
+\begin{center}
+$H_0: \beta_2 = 0$ (There is no difference in means)
+
+$H_1: \beta_2 \neq 0$ (There is a difference in means)
+\end{center}
+
+\begin{flushleft}
+F-test can be conducted to perform a hypothesis test. The F-test function to be used are following:
+\end{flushleft}
+
+\begin{center}
+$F = \frac{MSR(x_2|x_1)}{MSE(x_1, x_2)}$
+
+Critical Region: $f > F(0.95, 1, 16) \approx 4.49$
+\end{center}
+
+\begin{flushleft}
+Note: we could have conducted Student's t-test as well instead of F-test.
+\end{flushleft}
+
+\begin{flushleft}
+95\% of the confidence level has been used to conduct the hypothesis test in order to control Type I error. ($\alpha = 0.05$) $MSR(x_2|x_1) = 0.95590$ and $MSE(x_1, x_2) = 2.75500$. Since $\frac{MSR(x_2|x_1)}{MSE(x_1, x_2)} = 0.3468 < 3.633723$, we failed to reject the null hypothesis. There is not enough evidence to conclude that there is an effect of the type of make on the operating cost per mile when adjusted for the cruising speed. $p$-value$ \approx 0.56$
+\end{flushleft}
+
+
+\section{Part C}
+\begin{flushleft}
+The following suggests the model to be used for this problem.
+\end{flushleft}
+
+\begin{center}
+$Y_i = \beta_0 + \beta_1x_{i1} + \beta_2x_{i2} + \beta_{12}x_{i1}x_{i2} + \epsilon_i$
+\end{center}
+
+\begin{flushleft}
+The main difference between the model in Part B and Part C is in Part C, the interaction model is added in order to investigate the slope difference, like the following.
+\end{flushleft}
+
+\begin{center}
+$Y_i = (\beta_0 + \beta_2x_{i2}) + (\beta_1 + \beta_{12}x_{i2})x_{i1} + \epsilon_i$
+\end{center}
+
+\begin{flushleft}
+While $(\beta_0 + \beta_2x_{i2})$ serves as a $y$-intercept, $(\beta_1+\beta_{12}x_{i2})$ serves as a slope of the model, considering the above model is a linear. Hence, we can denote the following:
+\end{flushleft}
+
+\begin{itemize}
+\item Note: $x_2 = 0$ for Make A and $1$ for Make B.
+\item $E(Y) = \beta_0 + \beta_1x_{i1}$ (Interpret: the mean operating cost per mile of Make A, slope is $\beta_1$)
+\item $E(Y) = (\beta_0 + \beta_2x_{i2}) + (\beta_1 + \beta_{12}x_{i2})x_{i1}$ (Interpret: the mean operating cost per mile of Make B, slope is $\beta_1 + \beta_{12}x_{i2}$)
+\end{itemize}
+
+\begin{flushleft}
+95\% confidence interval for $\beta_{12}$ can be obtained using the following equation:
+\end{flushleft}
+
+\begin{center}
+$\hat{\beta}_{12} \pm t(1-\frac{\alpha}{2}, 15) \sqrt{U^\prime_2(X^\prime X)^{-1}U_2MSE}$
+\end{center}
+
+\begin{flushleft}
+Based on my calculation (which is provided in a separate sheet of paper), I am 95\% confident that the interaction effect of the cruising speed and the type of makes - that is, the difference of change in mean operating cost per mile when the cruising speed increases based on the type of makes - is between -0.1769 and -0.0717. The hypothesis test has been conducted in order to verify the above confidence interval is significant.
+\end{flushleft}
+
+\begin{center}
+$H_0: \beta_{12} = 0$ (Interpret: no interaction effect of type of make and cruising speed)
+
+$H_1: \beta_{12} \neq 0$ (Interpret: there is an interaction effect)
+\end{center}
+
+\begin{flushleft}
+F-test can be conducted to perform a hypothesis test. The F-test function to be used are following:
+\end{flushleft}
+
+\begin{center}
+$F = \frac{MSR(x_1x_2|x_1,x_2)}{MSE(x_1,x_2,x_1x_2)}$
+
+Critical Region: $f > F(0.95, 1, 15) \approx 4.54$
+\end{center}
+
+\begin{flushleft}
+95\% of the confidence level has been used to conduct the hypothesis test in order to control Type I error. ($\alpha = 0.05$) $MSR(x_1x_2|x_1,x_2) = 25.97618$ and $MSE(x_1,x_2,x_1x_2) = 1.20692$. Since $\frac{MSR(x_1x_2|x_1,x_2)}{MSE(x_1,x_2,x_1x_2)} \approx 25 > 3.28$, we reject the null hypothesis. There is the difference of change in mean operating cost per mile when the cruising speed increases between Make A and B. $p$-value$ \approx 0.0003$. Another hypothesis test has been conducted to see whether or not there is a relationship between the operating cost per mile and the type of makes.
+\end{flushleft}
+
+\begin{center}
+$H_0: \beta_{12} = \beta_{2} = 0$ (Interpret: no relation between the operating cost per mile and the type of make)
+
+$H_1: \beta_{12} \neq 0$ AND/OR $\beta_{2} \neq 0$ (Interpret: at least one of them is not 0)
+\end{center}
+
+\begin{flushleft}
+F-test can be conducted to perform a hypothesis test. The F-test function to be used are following:
+\end{flushleft}
+
+\begin{center}
+$F = \frac{MSR(x_2,x_1x_2|x_1)}{MSE(x_1,x_2,x_1x_2)}$
+
+Critical Region: $f > F(0.95, 2, 15) = 3.287382$
+\end{center}
+
+\begin{flushleft}
+95\% of the confidence level has been used to conduct the hypothesis test in order to control Type I error. ($\alpha = 0.05$) $SSR(x_1x_2|x_1,x_2) = SSR(x_2|x_1) + SSR(x_1x_2|x_1,x_2) = 0.95590 + 25.97618 = 26.93209$ and $MSE(x_1,x_2,x_1x_2) = 1.20692$. Since $\frac{MSR(x_1x_2|x_1,x_2)}{MSE(x_1,x_2,x_1x_2)} = 11.1573 > 3.28$, so we reject the null hypothesis. vThere is a relationship between the operating cost per mile and type of makes. $p$-value$ < 0.001$.
+\end{flushleft}
+
+\section{Appendix}
+\begin{flushleft}
+The following are also attached in order to help you interpret my procedure.
+\end{flushleft}
+
+\begin{itemize}
+\item A SAS source code.
+\item A SAS output
+\item A hand-written calculating procedure for Part C (denoted as: which is provided in a separate sheet of paper)
+\end{itemize}
+
+\section{Acknowledgement}
+\begin{flushleft}
+It was great to take a STA 463 class led by Dr. Charles L. Dunn.
+\end{flushleft}
+
+\end{document}
